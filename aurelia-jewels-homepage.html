@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURELIA JEWELS — Jewellery That Tells Your Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7EFE2;
+    --champagne:#EFE1C8;
+    --espresso:#2B1B10;
+    --espresso-2:#38251A;
+    --beige:#DCC7A3;
+    --gold:#B4915A;
+    --gold-soft:#CBA96E;
+    --black:#181109;
+    --line: rgba(43,27,16,0.15);
+    --line-light: rgba(247,239,226,0.2);
+    --maxw:1320px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ivory); color:var(--espresso); font-family:'Poppins',sans-serif; font-weight:300;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  img{display:block; width:100%; height:100%; object-fit:cover;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 48px;}
+  h1,h2,h3,h4{font-family:'Cormorant Garamond', serif; font-weight:500; line-height:1.08;}
+  .eyebrow{
+    font-family:'Poppins',sans-serif; font-size:11px; letter-spacing:0.26em; text-transform:uppercase;
+    color:var(--gold); display:flex; align-items:center; gap:10px; margin-bottom:16px; font-weight:500;
+  }
+  .beads{ display:inline-flex; gap:4px; }
+  .beads span{ width:4px; height:4px; border-radius:50%; background:var(--gold); display:inline-block;}
+  .beads span:nth-child(2){ opacity:0.6;} .beads span:nth-child(3){ opacity:0.35;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    padding:16px 36px; font-family:'Poppins',sans-serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase;
+    border:1px solid var(--espresso); cursor:pointer; transition:all .4s ease; white-space:nowrap; font-weight:500;
+  }
+  .btn-dark{ background:var(--espresso); color:var(--ivory); }
+  .btn-dark:hover{ background:transparent; color:var(--espresso); }
+  .btn-outline{ background:transparent; color:var(--espresso); }
+  .btn-outline:hover{ background:var(--espresso); color:var(--ivory); }
+  .btn-ivory{ border-color:var(--ivory); color:var(--ivory); }
+  .btn-ivory:hover{ background:var(--ivory); color:var(--espresso); }
+
+  /* ---- announcement ---- */
+  .announce{ background:var(--espresso); color:var(--beige); text-align:center; padding:11px 0; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; border-bottom:1px solid rgba(180,145,90,0.35);}
+
+  /* ---- header ---- */
+  header{ position:sticky; top:0; z-index:100; background:rgba(247,239,226,0.93); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);}
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:24px 48px; max-width:var(--maxw); margin:0 auto;}
+  .logo{ font-family:'Cormorant Garamond',serif; font-size:26px; letter-spacing:0.16em; font-weight:600;}
+  .nav-links{ display:flex; gap:34px; list-style:none;}
+  .nav-links a{ font-size:12px; letter-spacing:0.1em; text-transform:uppercase; position:relative; padding-bottom:4px;}
+  .nav-links a::after{ content:""; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--gold); transition:width .3s ease;}
+  .nav-links a:hover::after{ width:100%;}
+  .nav-icons{ display:flex; gap:20px; align-items:center;}
+  .nav-icons button{ background:none; border:none; cursor:pointer; color:var(--espresso);}
+  .burger{ display:none; background:none; border:none; cursor:pointer;}
+
+  /* ---- divider (bead chain) ---- */
+  .chain-divider{ display:flex; align-items:center; justify-content:center; gap:9px; padding:0 0 0; }
+  .chain-divider .ln{ height:1px; width:70px; background:linear-gradient(90deg, transparent, var(--gold)); }
+  .chain-divider .ln.r{ background:linear-gradient(90deg, var(--gold), transparent);}
+  .chain-divider .dot{ width:5px; height:5px; border-radius:50%; background:var(--gold);}
+
+  /* ---- hero ---- */
+  .hero{ position:relative; display:grid; grid-template-columns:0.82fr 1.18fr; min-height:90vh;}
+  .hero-text{ display:flex; flex-direction:column; justify-content:center; padding:60px 56px 60px 48px;}
+  .hero h1{ font-size:clamp(42px,5.4vw,76px); font-weight:500; margin-bottom:24px; font-style:italic;}
+  .hero h1 .plain{ font-style:normal; display:block;}
+  .hero p{ font-size:16px; color:#5c4530; max-width:380px; line-height:1.75; margin-bottom:38px; font-weight:300;}
+  .hero-btns{ display:flex; gap:16px; flex-wrap:wrap;}
+  .hero-img{ position:relative; overflow:hidden;}
+  .hero-img img{ position:absolute; inset:0;}
+  .hero-img .tag{
+    position:absolute; left:36px; bottom:36px; background:rgba(43,27,16,0.7); backdrop-filter:blur(6px);
+    color:var(--ivory); padding:16px 22px; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; border-left:2px solid var(--gold);
+  }
+  .hero-img .tag strong{ display:block; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px; letter-spacing:0; text-transform:none; margin-top:4px; font-weight:500;}
+
+  section{ padding:120px 0;}
+  .section-head{ text-align:center; max-width:620px; margin:0 auto 60px;}
+  .section-head h2{ font-size:clamp(32px,3.4vw,50px); margin-bottom:14px;}
+  .section-head p{ color:#5c4530; font-size:14.5px; line-height:1.7; font-weight:300;}
+
+  /* ---- collections ---- */
+  .collections{ background:var(--champagne);}
+  .col-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line);}
+  .col-card{ position:relative; aspect-ratio:3/4.2; overflow:hidden; background:var(--espresso);}
+  .col-card img{ transition:transform .8s cubic-bezier(.2,.8,.2,1); opacity:0.94;}
+  .col-card:hover img{ transform:scale(1.06);}
+  .col-card::before{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,17,9,0) 42%, rgba(24,17,9,0.85) 100%); z-index:1;}
+  .col-body{ position:absolute; left:22px; right:22px; bottom:24px; z-index:2; color:var(--ivory);}
+  .col-body h3{ font-size:23px; margin-bottom:10px; font-weight:500; font-style:italic;}
+  .col-body a{ font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase; border-bottom:1px solid var(--gold); padding-bottom:5px; color:var(--beige);}
+
+  /* ---- product grid ---- */
+  .prod-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:36px 26px;}
+  .prod-card{ display:flex; flex-direction:column;}
+  .prod-img{ position:relative; aspect-ratio:1/1.12; overflow:hidden; background:var(--beige); margin-bottom:18px;}
+  .prod-img img{ transition:transform .6s ease;}
+  .prod-card:hover .prod-img img{ transform:scale(1.05);}
+  .prod-wish{ position:absolute; top:14px; right:14px; z-index:2; width:32px; height:32px; border-radius:50%; background:rgba(247,239,226,0.9); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transform:translateY(-6px); transition:all .3s ease;}
+  .prod-card:hover .prod-wish{ opacity:1; transform:translateY(0);}
+  .prod-add{
+    position:absolute; left:14px; right:14px; bottom:14px; background:var(--ivory); color:var(--espresso);
+    text-align:center; padding:12px; font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase;
+    opacity:0; transform:translateY(10px); transition:all .35s ease; cursor:pointer; border:1px solid var(--espresso);
+  }
+  .prod-card:hover .prod-add{ opacity:1; transform:translateY(0);}
+  .prod-add:hover{ background:var(--espresso); color:var(--ivory);}
+  .prod-stars{ color:var(--gold); font-size:12px; letter-spacing:2px; margin-bottom:7px;}
+  .prod-stars span{ color:#b7a689; font-size:11px; letter-spacing:0; margin-left:6px;}
+  .prod-name{ font-family:'Cormorant Garamond',serif; font-size:19px; margin-bottom:6px; font-weight:500;}
+  .prod-price{ font-size:14px; color:#5c4530;}
+
+  /* ---- brand story ---- */
+  .story{ display:grid; grid-template-columns:1fr 1fr; align-items:center;}
+  .story-img{ aspect-ratio:1/1.05; overflow:hidden;}
+  .story-text{ padding:80px 90px;}
+  .story-text h2{ font-size:clamp(30px,3.2vw,46px); margin-bottom:24px; font-style:italic;}
+  .story-text p{ font-size:15px; line-height:1.85; color:#5c4530; margin-bottom:30px; font-weight:300; max-width:440px;}
+
+  /* ---- editorial banner ---- */
+  .editorial{ position:relative; height:76vh; min-height:500px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;}
+  .editorial img{ position:absolute; inset:0;}
+  .editorial::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,17,9,0.32), rgba(20,14,8,0.58));}
+  .editorial-content{ position:relative; z-index:2; color:var(--ivory);}
+  .editorial-content .eyebrow{ justify-content:center; color:var(--beige);}
+  .editorial-content h2{ font-size:clamp(38px,5.4vw,74px); font-style:italic; font-weight:500; margin:14px 0 12px;}
+  .editorial-content p{ font-size:15px; color:var(--beige); margin-bottom:32px; font-weight:300;}
+
+  /* ---- bridal ---- */
+  .bridal{ background:var(--espresso); color:var(--ivory);}
+  .bridal .section-head p{ color:var(--beige);}
+  .bridal-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:26px; align-items:center;}
+  .bridal-imgs{ display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .bridal-imgs .b-img{ aspect-ratio:3/4; overflow:hidden; border:1px solid var(--line-light);}
+  .bridal-imgs .b-img:nth-child(2){ margin-top:40px;}
+  .bridal-text{ padding:0 30px;}
+  .bridal-text h2{ font-size:clamp(30px,3.4vw,48px); margin-bottom:22px; font-style:italic;}
+  .bridal-text p{ font-size:15px; line-height:1.85; color:var(--beige); margin-bottom:34px; font-weight:300; max-width:420px;}
+  .bridal-list{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px;}
+  .bridal-list span{ font-size:11px; letter-spacing:0.1em; text-transform:uppercase; border:1px solid var(--line-light); padding:9px 16px; color:var(--beige);}
+
+  /* ---- why choose us ---- */
+  .why-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:36px; text-align:center;}
+  .why-item{ padding:10px;}
+  .why-icon{ width:56px; height:56px; margin:0 auto 22px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold);}
+  .why-item h4{ font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:500; margin-bottom:10px;}
+  .why-item p{ font-size:13px; color:#5c4530; line-height:1.7; font-weight:300;}
+
+  /* ---- reviews ---- */
+  .reviews{ background:var(--champagne);}
+  .rev-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+  .rev-card{ background:var(--ivory); padding:38px 32px; border:1px solid var(--line);}
+  .rev-stars{ color:var(--gold); letter-spacing:3px; font-size:14px; margin-bottom:18px;}
+  .rev-card p{ font-size:14px; line-height:1.85; color:#4a3722; font-weight:300; margin-bottom:26px; min-height:120px;}
+  .rev-who{ display:flex; align-items:center; gap:14px;}
+  .rev-avatar{ width:42px; height:42px; border-radius:50%; overflow:hidden; background:linear-gradient(140deg,var(--gold),var(--beige));}
+  .rev-who .name{ font-size:13.5px; letter-spacing:0.04em;}
+  .rev-who .loc{ font-size:11px; color:#8a7355;}
+
+  /* ---- instagram ---- */
+  .insta{ text-align:center;}
+  .insta-sub{ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:var(--gold); margin-top:6px;}
+  .insta-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:4px; margin-top:50px;}
+  .insta-item{ aspect-ratio:1/1; overflow:hidden; position:relative;}
+  .insta-item img{ transition:transform .5s ease;}
+  .insta-item:hover img{ transform:scale(1.08);}
+  .insta-item::before{ content:"♡"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; opacity:0; transition:all .3s ease;}
+  .insta-item:hover::before{ opacity:1; background:rgba(24,17,9,0.32);}
+
+  /* ---- newsletter ---- */
+  .newsletter{ background:var(--espresso); color:var(--ivory); text-align:center;}
+  .newsletter .wrap{ display:flex; flex-direction:column; align-items:center;}
+  .newsletter h2{ font-size:clamp(32px,3.6vw,52px); margin-bottom:16px; font-style:italic;}
+  .newsletter p{ color:var(--beige); font-size:14.5px; font-weight:300; max-width:420px; margin-bottom:38px;}
+  .nl-form{ display:flex; width:100%; max-width:460px; border-bottom:1px solid var(--beige);}
+  .nl-form input{ flex:1; border:none; background:transparent; padding:14px 6px; font-family:'Poppins',sans-serif; font-size:14px; outline:none; color:var(--ivory);}
+  .nl-form input::placeholder{ color:#9c8362;}
+  .nl-form button{ background:none; border:none; font-size:11.5px; letter-spacing:0.18em; text-transform:uppercase; cursor:pointer; padding:14px 6px; color:var(--ivory); border-left:1px solid var(--line-light); font-family:'Poppins',sans-serif;}
+  .nl-form button:hover{ color:var(--gold-soft);}
+
+  /* ---- footer ---- */
+  footer{ background:var(--black); color:#cbb890; padding:90px 0 0;}
+  .foot-top{ display:grid; grid-template-columns:1.4fr repeat(4,1fr); gap:40px; padding-bottom:70px; border-bottom:1px solid var(--line-light);}
+  .foot-logo{ font-family:'Cormorant Garamond',serif; font-size:26px; letter-spacing:0.14em; color:var(--ivory); margin-bottom:18px; font-weight:600;}
+  .foot-top p{ font-size:13.5px; line-height:1.8; color:#a58c66; max-width:260px; font-weight:300;}
+  .foot-col h4{ font-family:'Poppins',sans-serif; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ivory); margin-bottom:20px; font-weight:500;}
+  .foot-col ul{ list-style:none; display:flex; flex-direction:column; gap:13px;}
+  .foot-col a{ font-size:13.5px; color:#a58c66; transition:color .25s ease;}
+  .foot-col a:hover{ color:var(--gold-soft);}
+  .foot-social{ display:flex; gap:16px; margin-top:22px;}
+  .foot-social a{ width:36px; height:36px; border:1px solid var(--line-light); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px;}
+  .foot-social a:hover{ border-color:var(--gold); color:var(--gold-soft);}
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; padding:26px 0; font-size:11.5px; color:#7d6845; flex-wrap:wrap; gap:10px;}
+  .foot-bottom .legal{ display:flex; gap:24px;}
+
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{ opacity:1; transform:translateY(0);}
+
+  @media (max-width:1080px){
+    .col-grid{ grid-template-columns:repeat(2,1fr);}
+    .prod-grid{ grid-template-columns:repeat(2,1fr);}
+    .why-grid{ grid-template-columns:repeat(2,1fr); row-gap:40px;}
+    .foot-top{ grid-template-columns:1fr 1fr; row-gap:44px;}
+    .rev-grid{ grid-template-columns:1fr;}
+    .insta-grid{ grid-template-columns:repeat(3,1fr);}
+    .bridal-grid{ grid-template-columns:1fr;}
+    .bridal-text{ padding:0; order:2;}
+  }
+  @media (max-width:860px){
+    .nav-links{ display:none;} .burger{ display:block;}
+    .hero{ grid-template-columns:1fr; min-height:auto;}
+    .hero-img{ height:56vh;}
+    .hero-text{ padding:56px 28px;}
+    .story{ grid-template-columns:1fr;}
+    .story-text{ padding:56px 28px;}
+    .wrap{ padding:0 24px;}
+    section{ padding:80px 0;}
+    .col-grid{ grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .nav{ padding:18px 24px;}
+    .prod-grid{ grid-template-columns:1fr 1fr;}
+    .col-grid{ grid-template-columns:1fr;}
+    .why-grid{ grid-template-columns:1fr;}
+    .insta-grid{ grid-template-columns:repeat(3,1fr);}
+    .foot-top{ grid-template-columns:1fr;}
+    .nl-form{ flex-direction:column; border-bottom:none; gap:14px;}
+    .nl-form input{ border-bottom:1px solid var(--beige);}
+    .nl-form button{ border-left:none; border:1px solid var(--beige);}
+  }
+</style>
+</head>
+<body>
+
+<div class="announce">Complimentary Shipping on Orders Over ₹2,999</div>
+
+<header>
+  <nav class="nav">
+    <a href="#" class="logo">AURELIA JEWELS</a>
+    <ul class="nav-links">
+      <li><a href="#top">Home</a></li>
+      <li><a href="#new">New Arrivals</a></li>
+      <li><a href="#collections">Necklaces</a></li>
+      <li><a href="#collections">Earrings</a></li>
+      <li><a href="#collections">Rings</a></li>
+      <li><a href="#collections">Bracelets</a></li>
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#story">About Us</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button aria-label="Search"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+      <button aria-label="Account"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
+      <button aria-label="Wishlist"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7.5-4.7-10-9.3C.4 8 2 4.5 5.6 4c2.1-.3 3.9.8 6.4 3.4C14.5 4.8 16.3 3.7 18.4 4c3.6.5 5.2 4 3.6 7.7C19.5 16.3 12 21 12 21z"/></svg></button>
+      <button aria-label="Shopping bag"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button>
+      <button class="burger" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    </div>
+  </nav>
+</header>
+
+<section id="top" style="padding:0;">
+  <div class="hero">
+    <div class="hero-text">
+      <div class="eyebrow"><span class="beads"><span></span><span></span><span></span></span> The Aurelia Edit</div>
+      <h1>Jewellery That<span class="plain">Tells Your Story.</span></h1>
+      <p>Timeless pieces designed to make every moment unforgettable — crafted in gold, worn for a lifetime.</p>
+      <div class="hero-btns">
+        <a href="#new" class="btn btn-dark">Shop Collection</a>
+        <a href="#new" class="btn btn-outline">Explore New Arrivals</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1699256083652-5abf19da48c2?auto=format&fit=crop&w=1400&q=80" alt="Sophisticated model wearing elegant gold Aurelia Jewels jewellery in warm natural light">
+      <div class="tag">Signature Piece<strong>The Aurelia Necklace</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="collections" id="collections">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center;"><span class="beads"><span></span><span></span><span></span></span> Shop By Edit</div>
+      <h2>Featured Collections</h2>
+      <p>Four edits, each built around a moment — from everyday gold to your most beautiful day.</p>
+    </div>
+  </div>
+  <div class="col-grid reveal">
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1601121141499-17ae80afc03a?auto=format&fit=crop&w=900&q=80" alt="Everyday Gold collection">
+      <div class="col-body"><h3>Everyday Gold</h3><a href="#">Shop Now</a></div>
+    </div>
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1721034917345-d17c5405ead0?auto=format&fit=crop&w=900&q=80" alt="Statement Pieces collection">
+      <div class="col-body"><h3>Statement Pieces</h3><a href="#">Shop Now</a></div>
+    </div>
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1688382654723-a7366006519b?auto=format&fit=crop&w=900&q=80" alt="Bridal Collection">
+      <div class="col-body"><h3>Bridal Collection</h3><a href="#">Shop Now</a></div>
+    </div>
+    <div class="col-card">
+      <img src="https://images.unsplash.com/photo-1640183298005-3a4497cc6a37?auto=format&fit=crop&w=900&q=80" alt="Timeless Classics collection">
+      <div class="col-body"><h3>Timeless Classics</h3><a href="#">Shop Now</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="new">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center;"><span class="beads"><span></span><span></span><span></span></span> Most Loved</div>
+      <h2>Best Sellers</h2>
+      <p>The pieces our community reaches for on repeat.</p>
+    </div>
+    <div class="prod-grid reveal">
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=700&q=80" alt="Classic Gold Pendant">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★★<span>(142)</span></div>
+        <div class="prod-name">Classic Gold Pendant</div>
+        <div class="prod-price">₹ 3,999</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1600862754152-80a263dd564f?auto=format&fit=crop&w=700&q=80" alt="Aurelia Hoop Earrings">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★★<span>(98)</span></div>
+        <div class="prod-name">Aurelia Hoop Earrings</div>
+        <div class="prod-price">₹ 2,499</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1704136404616-0fe61c322633?auto=format&fit=crop&w=700&q=80" alt="Minimal Gold Ring">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★☆<span>(76)</span></div>
+        <div class="prod-name">Minimal Gold Ring</div>
+        <div class="prod-price">₹ 2,999</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1599475211349-f4c81b3216bc?auto=format&fit=crop&w=700&q=80" alt="Pearl Drop Earrings">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★★<span>(121)</span></div>
+        <div class="prod-name">Pearl Drop Earrings</div>
+        <div class="prod-price">₹ 3,499</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1601121141122-e62a764f15c9?auto=format&fit=crop&w=700&q=80" alt="Signature Tennis Bracelet">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★★<span>(203)</span></div>
+        <div class="prod-name">Signature Tennis Bracelet</div>
+        <div class="prod-price">₹ 5,999</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1601121141412-75c39efebac9?auto=format&fit=crop&w=700&q=80" alt="Celestial Necklace">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★☆<span>(64)</span></div>
+        <div class="prod-name">Celestial Necklace</div>
+        <div class="prod-price">₹ 4,499</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1601121141461-920cb1993441?auto=format&fit=crop&w=700&q=80" alt="Classic Gold Bangle">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★★<span>(87)</span></div>
+        <div class="prod-name">Classic Gold Bangle</div>
+        <div class="prod-price">₹ 3,799</div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.unsplash.com/photo-1727784891998-5adcdb7cd8e7?auto=format&fit=crop&w=700&q=80" alt="Solitaire Ring">
+          <div class="prod-wish">♡</div>
+          <div class="prod-add">Quick Add</div>
+        </div>
+        <div class="prod-stars">★★★★★<span>(159)</span></div>
+        <div class="prod-name">Solitaire Ring</div>
+        <div class="prod-price">₹ 6,499</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="chain-divider"><span class="ln"></span><span class="dot"></span><span class="ln r"></span></div>
+
+<section id="story">
+  <div class="story">
+    <div class="story-img reveal">
+      <img src="https://images.unsplash.com/photo-1721034917345-d17c5405ead0?auto=format&fit=crop&w=1000&q=80" alt="Close-up Aurelia Jewels craftsmanship photograph">
+    </div>
+    <div class="story-text reveal">
+      <div class="eyebrow"><span class="beads"><span></span><span></span><span></span></span> Luxury Brand Story</div>
+      <h2>Made to Be<br>Remembered.</h2>
+      <p>Aurelia Jewels creates timeless pieces that blend modern elegance with classic craftsmanship. Every detail — from the curve of a clasp to the weight of a chain — is considered.</p>
+      <p>Each piece is designed to become part of your story: worn to first days, quiet Sundays, and the moments in between.</p>
+      <a href="#story" class="btn btn-outline">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<section class="editorial" style="padding:0;">
+  <img src="https://images.unsplash.com/photo-1688382654723-a7366006519b?auto=format&fit=crop&w=1600&q=80" alt="The Art of Layering editorial banner featuring layered gold jewellery">
+  <div class="editorial-content">
+    <div class="eyebrow">The Layered Edit</div>
+    <h2>The Art of Layering</h2>
+    <p>Discover pieces designed to be worn together.</p>
+    <a href="#new" class="btn btn-ivory">Shop The Edit</a>
+  </div>
+</section>
+
+<section class="bridal">
+  <div class="wrap">
+    <div class="bridal-grid">
+      <div class="bridal-imgs reveal">
+        <div class="b-img"><img src="https://images.unsplash.com/photo-1688382654723-a7366006519b?auto=format&fit=crop&w=700&q=80" alt="Bridal necklace and jewellery"></div>
+        <div class="b-img"><img src="https://images.unsplash.com/photo-1727784891998-5adcdb7cd8e7?auto=format&fit=crop&w=700&q=80" alt="Bridal earrings and statement ring"></div>
+      </div>
+      <div class="bridal-text reveal">
+        <div class="eyebrow"><span class="beads"><span></span><span></span><span></span></span> Bridal Collection</div>
+        <h2>For Your Most<br>Beautiful Moments.</h2>
+        <p>Bridal necklaces, jhumka earrings, bangles and statement rings — heirloom-worthy pieces designed for the day you'll remember forever.</p>
+        <div class="bridal-list">
+          <span>Bridal Necklace</span><span>Jhumka Earrings</span><span>Bangles</span><span>Statement Ring</span>
+        </div>
+        <a href="#new" class="btn btn-ivory">Explore Bridal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center;"><span class="beads"><span></span><span></span><span></span></span> Why Choose Us</div>
+      <h2>The Aurelia Promise</h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2l2.4 6.9L21 11l-6.6 2.1L12 20l-2.4-6.9L3 11l6.6-2.1z"/></svg></div>
+        <h4>Premium Craftsmanship</h4>
+        <p>Every piece hand-finished by master jewellers.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M8 12l2.5 2.5L16 9"/></svg></div>
+        <h4>Quality Materials</h4>
+        <p>Genuine gold, diamonds and pearls, always certified.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="8" width="16" height="12" rx="1.5"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg></div>
+        <h4>Secure Packaging</h4>
+        <p>Every order arrives boxed, insured and beautifully wrapped.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></div>
+        <h4>Easy Returns</h4>
+        <p>15-day hassle-free returns on every piece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center;"><span class="beads"><span></span><span></span><span></span></span> In Their Words</div>
+      <h2>Customer Reviews</h2>
+    </div>
+    <div class="rev-grid reveal">
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"The Classic Gold Pendant is even more beautiful in person. It's become my everyday piece — light enough to wear to work, elegant enough for dinner."</p>
+        <div class="rev-who">
+          <div class="rev-avatar"><img src="https://images.unsplash.com/photo-1601121141499-17ae80afc03a?auto=format&fit=crop&w=100&q=80" alt="Customer jewellery detail"></div>
+          <div><div class="name">Ritika S.</div><div class="loc">Mumbai</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★★</div>
+        <p>"Ordered the Signature Tennis Bracelet for my anniversary and it exceeded expectations — beautifully packaged, and the stones catch the light perfectly."</p>
+        <div class="rev-who">
+          <div class="rev-avatar"><img src="https://images.unsplash.com/photo-1640183298005-3a4497cc6a37?auto=format&fit=crop&w=100&q=80" alt="Customer jewellery detail"></div>
+          <div><div class="name">Meera K.</div><div class="loc">Bengaluru</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-stars">★★★★☆</div>
+        <p>"Bought the bridal set for my wedding and received so many compliments. The jhumkas were the perfect statement without feeling heavy to wear all day."</p>
+        <div class="rev-who">
+          <div class="rev-avatar"><img src="https://images.unsplash.com/photo-1601121141461-920cb1993441?auto=format&fit=crop&w=100&q=80" alt="Customer jewellery detail"></div>
+          <div><div class="name">Anjali P.</div><div class="loc">Delhi</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="insta">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="justify-content:center;"><span class="beads"><span></span><span></span><span></span></span> Community</div>
+      <h2>Follow the Aurelia Story</h2>
+      <div class="insta-sub">@aureliajewels</div>
+    </div>
+  </div>
+  <div class="insta-grid reveal">
+    <div class="insta-item"><img src="https://images.unsplash.com/photo-1601121141499-17ae80afc03a?auto=format&fit=crop&w=500&q=80" alt="Aurelia Jewels community style"></div>
+    <div class="insta-item"><img src="https://images.unsplash.com/photo-1640183298005-3a4497cc6a37?auto=format&fit=crop&w=500&q=80" alt="Aurelia Jewels community style"></div>
+    <div class="insta-item"><img src="https://images.unsplash.com/photo-1601121141461-920cb1993441?auto=format&fit=crop&w=500&q=80" alt="Aurelia Jewels community style"></div>
+    <div class="insta-item"><img src="https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=500&q=80" alt="Aurelia Jewels community style"></div>
+    <div class="insta-item"><img src="https://images.unsplash.com/photo-1599475211349-f4c81b3216bc?auto=format&fit=crop&w=500&q=80" alt="Aurelia Jewels community style"></div>
+    <div class="insta-item"><img src="https://images.unsplash.com/photo-1601121141412-75c39efebac9?auto=format&fit=crop&w=500&q=80" alt="Aurelia Jewels community style"></div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="wrap reveal">
+    <div class="eyebrow" style="justify-content:center; color:var(--beige);"><span class="beads"><span></span><span></span><span></span></span> Stay Connected</div>
+    <h2>Join the Aurelia Circle</h2>
+    <p>Be the first to discover new collections, exclusive launches and special offers.</p>
+    <form class="nl-form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-logo">AURELIA JEWELS</div>
+        <p>Timeless pieces that blend modern elegance with classic craftsmanship — designed to become part of your story.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="Instagram">IG</a>
+          <a href="#" aria-label="Facebook">FB</a>
+          <a href="#" aria-label="Pinterest">PI</a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Necklaces</a></li>
+          <li><a href="#">Earrings</a></li>
+          <li><a href="#">Rings</a></li>
+          <li><a href="#">Bracelets</a></li>
+          <li><a href="#">Bridal</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Shipping &amp; Delivery</a></li>
+          <li><a href="#">Returns &amp; Exchanges</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Craftsmanship</a></li>
+          <li><a href="#">Jewellery Care</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul>
+          <li>hello@aureliajewels.com</li>
+          <li>0000</li>
+          <li>Mon–Sat, 10am–7pm IST</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 Aurelia Jewels. All rights reserved.</div>
+      <div class="legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el=>io.observe(el));
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+</script>
+
+</body>
+</html>
